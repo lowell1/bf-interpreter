@@ -1,0 +1,18 @@
+#app {
+  padding: 0 15%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  height: 100vh;
+}
+
+textarea {
+  margin-bottom: 1rem;
+  resize: vertical;
+  height: 20%;
+}
+
+button {
+  align-self: baseline;
+}
