@@ -73,6 +73,8 @@ export default class BrainfuckInterpreter {
             continue;
           }
           break;
+        default:
+          break;
       }
 
       this.#instructionPointer++;
