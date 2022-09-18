@@ -12,14 +12,28 @@ describe("Brainfuck Interpreter", () => {
 
   test("increments memoryPointer pointer", () => {
     const brainfuckInterpreter = new BrainfuckInterpreter(">>>");
-    brainfuckInterpreter.execute();
+    brainfuckInterpreter.run();
     expect(brainfuckInterpreter.memory).toEqual([0, 0, 0, 0]);
     expect(brainfuckInterpreter.memoryPointer).toEqual(3);
   });
 
-  test("executes code without brackets", () => {
+  test("runs code without brackets", () => {
     const brainfuckInterpreter = new BrainfuckInterpreter("+++>>++>+++++<-<++");
-    brainfuckInterpreter.execute();
+    brainfuckInterpreter.run();
     expect(brainfuckInterpreter.memory).toEqual([3, 2, 1, 5]);
+  });
+
+  test("loops", () => {
+    const brainfuckInterpreter = new BrainfuckInterpreter("+++[>+++++<-]");
+    brainfuckInterpreter.run();
+    expect(brainfuckInterpreter.memory).toEqual([0, 15]);
+  });
+
+  test.only("loops in loops", () => {
+    const brainfuckInterpreter = new BrainfuckInterpreter(
+      "+++[>++[>++++<-]<-]"
+    );
+    brainfuckInterpreter.run();
+    expect(brainfuckInterpreter.memory).toEqual([0, 0, 24]);
   });
 });

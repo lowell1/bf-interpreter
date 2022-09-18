@@ -26,14 +26,11 @@ export default class BrainfuckInterpreter {
     return this.#memoryPointer;
   }
 
-  execute() {
-    // const memory = [0];
-    // var memoryPointer = 0;
-    // var output = "";
-    // var instructionPointer = 0;
+  run() {
+    // indexes of open brackets in bf code
+    const bracketIndexStack = [];
 
     while (this.#instructionPointer < this.#instructions.length) {
-      console.log;
       switch (this.#instructions[this.#instructionPointer]) {
         case ">":
           // add new "memory location" to memory array if memoryPointer is at end
@@ -53,6 +50,28 @@ export default class BrainfuckInterpreter {
 
         case "-":
           this.#memory[this.#memoryPointer]--;
+          break;
+
+        case ",":
+          this.#output += String.fromCharCode(
+            this.#memory[this.#memoryPointer]
+          );
+
+          break;
+
+        case "[":
+          bracketIndexStack.push(this.#instructionPointer);
+          break;
+
+        // if the value in #memory array at index #memoryPointer is 0 pop the last bracket from the stack and proceed
+        // otherwise go back to first instruction after the last open bracket
+        case "]":
+          if (this.#memory[this.#memoryPointer] === 0) bracketIndexStack.pop();
+          else {
+            this.#instructionPointer =
+              bracketIndexStack[bracketIndexStack.length - 1] + 1;
+            continue;
+          }
           break;
       }
 
