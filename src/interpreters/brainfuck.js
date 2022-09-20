@@ -52,7 +52,7 @@ export default class BrainfuckInterpreter {
           this.#memory[this.#memoryPointer]--;
           break;
 
-        case ",":
+        case ".":
           this.#output += String.fromCharCode(
             this.#memory[this.#memoryPointer]
           );
