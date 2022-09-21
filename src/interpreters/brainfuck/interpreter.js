@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 export default class BrainfuckInterpreter {
   // // array of "memory locations" on which to operate
   #memory = [0];
