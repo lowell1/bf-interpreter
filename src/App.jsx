@@ -1,10 +1,9 @@
-import { useState } from "react";
-import BrainfuckUI from "./interpreters/brainfuck/BrainfuckUI";
+import Brainfuck from "./interpreters/brainfuck/Brainfuck";
 
 export default function App() {
   return (
     <div>
-      <BrainfuckUI />
+      <Brainfuck />
     </div>
   );
 }
