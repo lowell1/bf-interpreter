@@ -1,35 +1,17 @@
 import styles from "./styles.module.scss";
 import { useState, useEffect } from "react";
-import BrainfuckInterpreter from "./interpreter";
+import runCode from "./interpreter";
 
-export default function BrainfuckUI() {
+export default function Brainfuck() {
   const [codeInput, setCodeInput] = useState("");
   const [output, setOutput] = useState("");
 
-  useEffect(() => {
-    const onKeyPress = (event) => {
-      console.log(event);
-    };
-    document.body.addEventListener("keypress", onKeyPress);
-
-    return () => {
-      document.body.removeEventListener("keypress", onKeyPress);
-    };
-  }, []);
-
-  function addToOutput(char) {
-    setOutput((lastOutput) => lastOutput + char);
-  }
-
-  function onCodeInputChange(event) {
-    setCodeInput(event.target.value);
-  }
-
-  function onRunButtonClick() {
-    const interpreter = new BrainfuckInterpreter(codeInput, addToOutput);
-    interpreter.run();
-    // setOutput(interpreter.output);
-  }
+  const onRunButtonClick = () => {
+    runCode(codeInput, (char) =>
+      setOutput((lastOutput) => `${lastOutput}${char}`)
+    );
+  };
+  const onCodeInputChange = (event) => setCodeInput(event.target.value);
 
   return (
     <div id={styles.container}>
